@@ -2,7 +2,6 @@ package com.example.urbandictionary.view
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -60,7 +59,7 @@ class SearchLandingPage : AppCompatActivity() {
                     }
                     urbanViewModel.getSearchData(tieEntry.text.toString())
                     urbanViewModel.termLiveData.observe(this, definitionObserver)
-                } else this.makeLongToast("If you would like to search, please type a word.")
+                } else makeLongToast("If you would like to search, please type a word.")
             }
             btnClear.id -> //wipe out existing search results for end user
                 rvDefinitions.adapter = null

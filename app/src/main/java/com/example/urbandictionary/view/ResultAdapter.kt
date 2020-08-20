@@ -1,6 +1,5 @@
 package com.example.urbandictionary.view
 
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -10,7 +9,7 @@ import kotlinx.android.synthetic.main.list_item_definition.view.*
 
 class ResultAdapter(private val results: List<Define>): RecyclerView.Adapter<ResultAdapter.ResultHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-        ResultHolder(LayoutInflater.from(parent.context).inflate(R.layout.list_item_definition, parent, false))
+        ResultHolder(parent.inflate(R.layout.list_item_definition))
 
     override fun onBindViewHolder(holder: ResultHolder, position: Int) =
         results[position].let {
