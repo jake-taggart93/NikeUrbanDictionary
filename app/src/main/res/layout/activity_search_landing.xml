@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/holo_blue_bright"
+    tools:context=".view.SearchLandingPage">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilEntry"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="16dp"
+        app:boxCornerRadiusBottomEnd="5dp"
+        app:boxCornerRadiusBottomStart="5dp"
+        app:boxCornerRadiusTopEnd="5dp"
+        app:boxCornerRadiusTopStart="5dp"
+        app:boxStrokeColor="@android:color/holo_blue_dark"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tieEntry"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:hint="@string/word_to_define"
+            android:textAlignment="center"
+            android:textColor="@android:color/black"
+            android:textColorHint="@android:color/primary_text_light"
+            android:textSize="16sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/btnSearch"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:onClick="onClick"
+        android:text="@string/search_for_definition"
+        android:textAllCaps="true"
+        app:layout_constraintEnd_toStartOf="@id/btnClear"
+        app:layout_constraintStart_toStartOf="@id/tilEntry"
+        app:layout_constraintTop_toBottomOf="@id/tilEntry" />
+
+    <Button
+        android:id="@+id/btnClear"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:onClick="onClick"
+        android:text="@string/clear"
+        android:textAllCaps="true"
+        app:layout_constraintEnd_toEndOf="@id/tilEntry"
+        app:layout_constraintStart_toEndOf="@id/btnSearch"
+        app:layout_constraintTop_toBottomOf="@id/tilEntry" />
+
+    <LinearLayout
+        android:id="@+id/llFoot"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:lines="2"
+            android:text="@string/author_jacob_taggart"
+            android:textAlignment="center" />
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/llFoot"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:onClick="onClick"
+        android:id="@+id/tvSortUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/tvSortDown"
+        app:layout_constraintEnd_toEndOf="@id/rvDefinitions"
+        android:textSize="12sp"
+        android:layout_marginBottom="4dp"
+        android:textColor="@android:color/holo_green_light"
+        android:text="@string/sort_by_thumbs_up"/>
+
+    <TextView
+        android:onClick="onClick"
+        android:id="@+id/tvSortDown"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/rvDefinitions"
+        app:layout_constraintEnd_toEndOf="@id/rvDefinitions"
+        android:textColor="@android:color/holo_red_light"
+        android:textSize="12sp"
+        android:layout_marginBottom="4dp"
+        android:text="@string/sort_by_thumbs_down"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvDefinitions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnSearch" />
+</androidx.constraintlayout.widget.ConstraintLayout>

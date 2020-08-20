@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">UrbanDictionary</string>
+    <string name="word_to_define">Word to define</string>
+    <string name="search_for_definition">Search word</string>
+    <string name="clear">Clear</string>
+    <string name="author_jacob_taggart">Author: Jacob Taggart\nUrban Dictionary Lite App</string>
+    <string name="sort_by_thumbs_down">Sort by Thumbs Down</string>
+    <string name="sort_by_thumbs_up">Sort by Thumbs Up</string>
+</resources>
