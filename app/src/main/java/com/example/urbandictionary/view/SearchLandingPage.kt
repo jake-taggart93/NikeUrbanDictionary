@@ -28,6 +28,7 @@ class SearchLandingPage : AppCompatActivity() {
         urbanViewModel = ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(application)).get(SearchViewModel::class.java)
         rvDefinitions.adapter = ResultAdapter(results = listOf())
         rvDefinitions.layoutManager = LinearLayoutManager(this)
+        urbanViewModel.termLiveData.observe(this, definitionObserver)
     }
 
     private val definitionObserver by lazy {
@@ -37,7 +38,6 @@ class SearchLandingPage : AppCompatActivity() {
                 currentList = it
                 currentAdapter = ResultAdapter(it)
                 rvDefinitions.adapter = currentAdapter
-                rvDefinitions.visibility = View.VISIBLE
             }
 
             response.errorMessage?.let {
@@ -60,7 +60,6 @@ class SearchLandingPage : AppCompatActivity() {
                         currentTerm = this
                     }
                     urbanViewModel.getSearchData(tieEntry.text.toString())
-                    urbanViewModel.termLiveData.observe(this, definitionObserver)
                 } else makeLongToast("If you would like to search, please type a word.")
             }
             btnClear.id -> //wipe out existing search results for end user
