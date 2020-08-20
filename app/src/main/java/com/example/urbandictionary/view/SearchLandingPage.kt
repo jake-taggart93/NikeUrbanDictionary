@@ -5,6 +5,7 @@ import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.urbandictionary.R
 import com.example.urbandictionary.data.model.Define
@@ -16,14 +17,15 @@ private const val ERROR = "Error"
 
 class SearchLandingPage : AppCompatActivity() {
 
-    private val urbanViewModel by lazy { SearchViewModel() }
     private var currentTerm: String = ""
     private var currentList: List<Define>? = null
     private lateinit var currentAdapter: ResultAdapter
+    private lateinit var urbanViewModel: SearchViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search_landing)
+        urbanViewModel = ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(application)).get(SearchViewModel::class.java)
         rvDefinitions.adapter = ResultAdapter(results = listOf())
         rvDefinitions.layoutManager = LinearLayoutManager(this)
     }
