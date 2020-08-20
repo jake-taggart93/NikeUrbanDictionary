@@ -20,9 +20,5 @@ class ResultAdapter(private val results: List<Define>): RecyclerView.Adapter<Res
 
      override fun getItemCount(): Int = results.size
 
-    class ResultHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
-        init {
-            itemView.visibility = View.VISIBLE
-        }
-    }
+    class ResultHolder(itemView: View): RecyclerView.ViewHolder(itemView)
 }
