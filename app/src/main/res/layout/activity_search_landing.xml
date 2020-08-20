@@ -113,6 +113,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvDefinitions"
+        android:background="@android:color/holo_orange_light"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -120,5 +121,7 @@
         android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnSearch" />
+        app:layout_constraintTop_toBottomOf="@id/btnSearch"
+        android:visibility="gone"
+        tools:listitem="@layout/list_item_definition"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
