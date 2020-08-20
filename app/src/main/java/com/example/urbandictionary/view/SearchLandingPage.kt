@@ -38,6 +38,7 @@ class SearchLandingPage : AppCompatActivity() {
                 rvDefinitions.adapter = currentAdapter
                 rvDefinitions.visibility = View.VISIBLE
             }
+
             response.errorMessage?.let {
                 AlertDialog.Builder(this).apply {
                     setTitle(ERROR)
@@ -59,7 +60,7 @@ class SearchLandingPage : AppCompatActivity() {
                     }
                     urbanViewModel.getSearchData(tieEntry.text.toString())
                     urbanViewModel.termLiveData.observe(this, definitionObserver)
-                } else Toast.makeText(this, "If you would like to search, please type a word.", Toast.LENGTH_LONG).show()
+                } else this.makeLongToast("If you would like to search, please type a word.")
             }
             btnClear.id -> //wipe out existing search results for end user
                 rvDefinitions.adapter = null
