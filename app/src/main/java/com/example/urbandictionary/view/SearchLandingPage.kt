@@ -13,8 +13,6 @@ import com.example.urbandictionary.data.model.ResponseUrban
 import com.example.urbandictionary.viewmodel.SearchViewModel
 import kotlinx.android.synthetic.main.activity_search_landing.*
 
-private const val ERROR = "Error"
-
 class SearchLandingPage : AppCompatActivity() {
 
     private var currentTerm: String = ""
@@ -25,10 +23,7 @@ class SearchLandingPage : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search_landing)
-        urbanViewModel = ViewModelProvider(
-            this,
-            ViewModelProvider.AndroidViewModelFactory.getInstance(application)
-        ).get(SearchViewModel::class.java)
+        urbanViewModel = ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(application)).get(SearchViewModel::class.java)
         rvDefinitions.adapter = ResultAdapter(results = listOf())
         rvDefinitions.layoutManager = LinearLayoutManager(this)
         urbanViewModel.termLiveData.observe(this, definitionObserver)
@@ -51,7 +46,7 @@ class SearchLandingPage : AppCompatActivity() {
             }
             response.errorMessage?.let {
                 AlertDialog.Builder(this).apply {
-                    setTitle(ERROR)
+                    setTitle(R.string.error)
                     setMessage(it)
                     setPositiveButton(android.R.string.ok, null)
                 }.show()
@@ -86,14 +81,13 @@ class SearchLandingPage : AppCompatActivity() {
     }
 
     private fun sortAdapter(up: Boolean) =
-        //will sort the list by thumbs up or thumbs down depending on bool param, then recreate the adapter in that order
-        if (up) {
+        if (up)
             rvDefinitions.adapter =
                 ResultAdapter((currentList as List<Define>).sortedByDescending { it.thumbsUp })
-        } else {
+        else
             rvDefinitions.adapter =
                 ResultAdapter((currentList as List<Define>).sortedByDescending { it.thumbsDown })
-        }
+
 
     private fun visibilitySwitch(majority: Boolean) =
         if (majority) {

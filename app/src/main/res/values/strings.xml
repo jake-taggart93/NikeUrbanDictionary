@@ -6,4 +6,5 @@
     <string name="author_jacob_taggart">Author: Jacob Taggart\nUrban Dictionary Lite App</string>
     <string name="sort_by_thumbs_down">Sort by Thumbs Down</string>
     <string name="sort_by_thumbs_up">Sort by Thumbs Up</string>
+    <string name="error">Error</string>
 </resources>
