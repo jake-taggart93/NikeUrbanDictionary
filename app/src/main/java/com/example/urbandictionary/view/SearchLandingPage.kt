@@ -63,17 +63,14 @@ class SearchLandingPage : AppCompatActivity() {
                         urbanViewModel.getSearchData(this)
                         currentTerm = this
                     }
-                    urbanViewModel.getSearchData(tieEntry.text.toString())
                 } else makeLongToast("If you would like to search, please type a word.")
             }
             btnClear.id -> {
                 rvDefinitions.adapter = ResultAdapter(listOf())
-                if (tvSortUp.visibility == View.VISIBLE) {
+                if (tvSortUp.visibility == View.VISIBLE)
                     tvSortUp.visibility = View.INVISIBLE
-                }
-                if (tvSortDown.visibility == View.VISIBLE) {
+                if (tvSortDown.visibility == View.VISIBLE)
                     tvSortDown.visibility = View.INVISIBLE
-                }
             }
             tvSortUp.id -> sortAdapter(true)
             else -> sortAdapter(false)
