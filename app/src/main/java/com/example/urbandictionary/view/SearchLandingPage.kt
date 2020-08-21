@@ -60,13 +60,20 @@ class SearchLandingPage : AppCompatActivity() {
                 if (tieEntry.text.isNullOrEmpty().not()) {
                     visibilitySwitch(false)
                     with(tieEntry.text.toString()) {
-                        urbanViewModel.getSearchData(this)
-                        currentTerm = this
+                        if (currentTerm == this && rvDefinitions.adapter?.itemCount != 0) {
+                            makeLongToast("You already have the results for this word listed.")
+                        } else {
+                            urbanViewModel.getSearchData(this)
+                            currentTerm = this
+                        }
                     }
                 } else makeLongToast("If you would like to search, please type a word.")
             }
             btnClear.id -> {
-                rvDefinitions.adapter = ResultAdapter(listOf())
+                ResultAdapter(listOf()).let {
+                    currentAdapter = it
+                    rvDefinitions.adapter = it
+                }
                 if (tvSortUp.visibility == View.VISIBLE)
                     tvSortUp.visibility = View.INVISIBLE
                 if (tvSortDown.visibility == View.VISIBLE)
