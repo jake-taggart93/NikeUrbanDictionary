@@ -2,8 +2,10 @@ package com.example.urbandictionary.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+
 import com.example.urbandictionary.data.model.ResponseUrban
 import com.example.urbandictionary.data.network.NetworkHelper
+
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -11,7 +13,6 @@ import retrofit2.Response
 class SearchViewModel : ViewModel() {
 
     data class Resource<T, U>(val data: T?, val errorMessage: U?)
-
     val termLiveData by lazy { MutableLiveData<Resource<ResponseUrban, String>>() }
 
     fun getSearchData(term: String) =
@@ -22,7 +23,7 @@ class SearchViewModel : ViewModel() {
                 }
 
                 override fun onResponse(call: Call<ResponseUrban>, response: Response<ResponseUrban>) {
-                        termLiveData.value = Resource(data = response.body(), errorMessage = null)
+                    termLiveData.value = Resource(data = response.body(), errorMessage = null)
                 }
             })
 }

@@ -25,7 +25,10 @@ class SearchLandingPage : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search_landing)
-        urbanViewModel = ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(application)).get(SearchViewModel::class.java)
+        urbanViewModel = ViewModelProvider(
+            this,
+            ViewModelProvider.AndroidViewModelFactory.getInstance(application)
+        ).get(SearchViewModel::class.java)
         rvDefinitions.adapter = ResultAdapter(results = listOf())
         rvDefinitions.layoutManager = LinearLayoutManager(this)
         urbanViewModel.termLiveData.observe(this, definitionObserver)
@@ -34,12 +37,18 @@ class SearchLandingPage : AppCompatActivity() {
     private val definitionObserver by lazy {
         Observer<SearchViewModel.Resource<ResponseUrban, String>> { response ->
             visibilitySwitch(true)
-            response.data?.definitions?.let {
+            response.data?.list?.let {
                 currentList = it
                 currentAdapter = ResultAdapter(it)
                 rvDefinitions.adapter = currentAdapter
+                if (it.isNotEmpty() && tvSortDown.visibility == View.INVISIBLE && tvSortUp.visibility == View.INVISIBLE) {
+                    tvSortDown.visibility = View.VISIBLE
+                    tvSortUp.visibility = View.VISIBLE
+                } else if (it.isEmpty() && tvSortDown.visibility == View.VISIBLE && tvSortUp.visibility == View.VISIBLE) {
+                    tvSortDown.visibility = View.INVISIBLE
+                    tvSortUp.visibility = View.INVISIBLE
+                }
             }
-
             response.errorMessage?.let {
                 AlertDialog.Builder(this).apply {
                     setTitle(ERROR)
@@ -50,7 +59,7 @@ class SearchLandingPage : AppCompatActivity() {
         }
     }
 
-    fun onClick(view: View) =
+    fun onClick(view: View) {
         when (view.id) {
             btnSearch.id -> {
                 if (tieEntry.text.isNullOrEmpty().not()) {
@@ -62,15 +71,29 @@ class SearchLandingPage : AppCompatActivity() {
                     urbanViewModel.getSearchData(tieEntry.text.toString())
                 } else makeLongToast("If you would like to search, please type a word.")
             }
-            btnClear.id -> //wipe out existing search results for end user
-                rvDefinitions.adapter = null
+            btnClear.id -> {
+                rvDefinitions.adapter = ResultAdapter(listOf())
+                if (tvSortUp.visibility == View.VISIBLE) {
+                    tvSortUp.visibility = View.INVISIBLE
+                }
+                if (tvSortDown.visibility == View.VISIBLE) {
+                    tvSortDown.visibility = View.INVISIBLE
+                }
+            }
             tvSortUp.id -> sortAdapter(true)
             else -> sortAdapter(false)
         }
-
-    private fun sortAdapter(up: Boolean) {
-        //will sort the list by thumbs up or thumbs down depending on bool param, then recreate the adapter in that order
     }
+
+    private fun sortAdapter(up: Boolean) =
+        //will sort the list by thumbs up or thumbs down depending on bool param, then recreate the adapter in that order
+        if (up) {
+            rvDefinitions.adapter =
+                ResultAdapter((currentList as List<Define>).sortedByDescending { it.thumbsUp })
+        } else {
+            rvDefinitions.adapter =
+                ResultAdapter((currentList as List<Define>).sortedByDescending { it.thumbsDown })
+        }
 
     private fun visibilitySwitch(majority: Boolean) =
         if (majority) {

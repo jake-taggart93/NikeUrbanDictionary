@@ -1,10 +1,8 @@
 package com.example.urbandictionary.data.model
 
-import androidx.room.Entity
 import com.google.gson.annotations.SerializedName
 
-@Entity
-data class ResponseUrban(val definitions: List<Define>?)
+data class ResponseUrban(val list: List<Define>)
 
 data class Define(
     val definition: String?,
