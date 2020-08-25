@@ -5,7 +5,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-private const val BASE_URL = "https://mashape-community-urban-dictionary.p.rapidapi.com/"
+const val BASE_URL = "https://mashape-community-urban-dictionary.p.rapidapi.com/"
 
 class NetworkHelper {
     private var instance: ApiService? = null
@@ -21,7 +21,6 @@ class NetworkHelper {
 
     private fun makeClient() =
         OkHttpClient.Builder().addInterceptor(makeInterceptor()).build()
-
 
     private fun makeInterceptor() =
         HttpLoggingInterceptor().apply {

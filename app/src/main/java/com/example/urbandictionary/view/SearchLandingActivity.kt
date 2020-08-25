@@ -13,7 +13,7 @@ import com.example.urbandictionary.data.model.ResponseUrban
 import com.example.urbandictionary.viewmodel.SearchViewModel
 import kotlinx.android.synthetic.main.activity_search_landing.*
 
-class SearchLandingPage : AppCompatActivity() {
+class SearchLandingActivity : AppCompatActivity() {
 
     private var currentTerm: String = ""
     private var currentList: List<Define>? = null
