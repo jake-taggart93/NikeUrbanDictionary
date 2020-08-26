@@ -15,35 +15,35 @@ import javax.inject.Singleton
 open class NetworkModule {
     @Provides
     @Singleton
-    fun provideOkHttpClient(loggingInterceptor: HttpLoggingInterceptor): OkHttpClient =
+    open fun provideOkHttpClient(loggingInterceptor: HttpLoggingInterceptor): OkHttpClient =
         OkHttpClient.Builder().addInterceptor(loggingInterceptor).build()
 
     @Provides
     @Singleton
-    fun provideInterceptor(): HttpLoggingInterceptor =
+    open fun provideInterceptor(): HttpLoggingInterceptor =
         HttpLoggingInterceptor().apply {
             level = HttpLoggingInterceptor.Level.BODY
         }
 
     @Provides
     @Singleton
-    fun provideGsonConverterFactory(): GsonConverterFactory = GsonConverterFactory.create()
+    open fun provideGsonConverterFactory(): GsonConverterFactory = GsonConverterFactory.create()
 
     @Provides
     @Singleton
-    fun provideRetrofit(okHttpClient: OkHttpClient, url: String, gsonConverterFactory: GsonConverterFactory): Retrofit =
+    open fun provideRetrofit(okHttpClient: OkHttpClient, url: String, gsonConverterFactory: GsonConverterFactory): Retrofit =
         Retrofit.Builder().baseUrl(url)
             .client(okHttpClient)
             .addConverterFactory(gsonConverterFactory).build()
 
     @Provides
     @Singleton
-    fun provideApiService(retrofit: Retrofit): ApiService =
+    open fun provideApiService(retrofit: Retrofit): ApiService =
         retrofit.create(ApiService::class.java)
 
     @Provides
     @Singleton
-    fun provideUrl(): String =
+    open fun provideUrl(): String =
         BASE_URL
 }
 
