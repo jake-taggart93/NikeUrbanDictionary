@@ -78,6 +78,7 @@ class SearchLandingActivity : AppCompatActivity() {
                     tvSortUp.visibility = View.INVISIBLE
                 if (tvSortDown.visibility == View.VISIBLE)
                     tvSortDown.visibility = View.INVISIBLE
+                tieEntry.setText("")
             }
             tvSortUp.id -> sortAdapter(true)
             else -> sortAdapter(false)

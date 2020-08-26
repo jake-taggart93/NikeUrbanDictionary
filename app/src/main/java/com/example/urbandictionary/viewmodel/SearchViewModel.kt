@@ -24,11 +24,15 @@ class SearchViewModel : ViewModel() {
         apiService.getDefinitions(term)
             .enqueue(object : Callback<ResponseUrban> {
                 override fun onFailure(call: Call<ResponseUrban>, t: Throwable) {
-                    termLiveData.value = Resource(data = null, errorMessage = t.message)
+                    termLiveData.postValue(Resource(data = null, errorMessage = t.message))
                 }
 
                 override fun onResponse(call: Call<ResponseUrban>, response: Response<ResponseUrban>) {
-                    termLiveData.value = Resource(data = response.body(), errorMessage = null)
+                    if ((response.body() as ResponseUrban).list.isEmpty()) {
+                        termLiveData.postValue(Resource(data = null, errorMessage = "No definitions found for word."))
+                    } else {
+                        termLiveData.postValue(Resource(data = response.body(), errorMessage = null))
+                    }
                 }
             })
 }
