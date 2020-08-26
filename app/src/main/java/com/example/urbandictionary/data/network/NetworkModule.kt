@@ -11,6 +11,8 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
+const val BASE_URL = "https://mashape-community-urban-dictionary.p.rapidapi.com/"
+
 @Module
 open class NetworkModule {
     @Provides
